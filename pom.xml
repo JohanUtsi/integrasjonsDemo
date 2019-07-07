@@ -19,6 +19,7 @@
     <modules>
         <module>klient</module>
         <module>fagsystem</module>
+        <module>integrasjonslosning</module>
     </modules>
 
     <properties>

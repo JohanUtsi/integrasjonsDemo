@@ -2,9 +2,13 @@ package com.eksempel.fagsystem.services.impl;
 
 import com.eksempel.fagsystem.daos.*;
 import com.eksempel.fagsystem.dtos.AvtaleDto;
+import com.eksempel.fagsystem.dtos.AvtaleStatusDto;
 import com.eksempel.fagsystem.entities.Avtale;
 import com.eksempel.fagsystem.services.AvtaleService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AvtaleServiceImpl implements AvtaleService {
@@ -25,10 +29,14 @@ public class AvtaleServiceImpl implements AvtaleService {
     }
 
     @Override
-    public Long create(AvtaleDto avtaleDto){
+    public AvtaleStatusDto create(AvtaleDto avtaleDto){
         Avtale avtale = toEntity(avtaleDto);
         this.avtaleRepository.save(avtale);
-        return avtale.getId();
+        AvtaleStatusDto avtaleStatusDto = new AvtaleStatusDto();
+        avtaleStatusDto.setAvtalenummer(avtale.getId());
+        avtaleStatusDto.setStatus(statusRepository.findById(avtale.getStatus().getId())
+                .orElse(null).getStatus());
+        return avtaleStatusDto;
     }
 
     private Avtale toEntity(AvtaleDto avtaleDto) {

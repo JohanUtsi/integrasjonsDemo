@@ -1,7 +1,8 @@
-package com.eksempel.fagsystem.controllers;
+package com.eksempel.integrasjonslosning.controllers;
 
-import com.eksempel.fagsystem.dtos.AvtaleDto;
-import com.eksempel.fagsystem.services.AvtaleService;
+import com.eksempel.integrasjonslosning.dtos.AvtaleStatusDto;
+import com.eksempel.integrasjonslosning.dtos.ForsikringsDto;
+import com.eksempel.integrasjonslosning.services.ForsikringsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.Consumes;
@@ -14,21 +15,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name = "avtaleResurser")
-@Path("/avtale")
-public class AvtaleController {
+@XmlRootElement(name = "forsikringsresurser")
+@Path("/forsikring")
+public class ForsikringsController {
 
     @Autowired
-    private AvtaleService avtaleService;
+    private ForsikringsService forsikringsService;
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response create(AvtaleDto avtaleDto) {
+    public Response create(ForsikringsDto forsikringsDto) {
         try {
+            AvtaleStatusDto avtaleStatusDto = forsikringsService.opprettAvtale(forsikringsDto);
             return Response
                     .status(Response.Status.CREATED)
-                    .entity(this.avtaleService.create(avtaleDto))
+                    .entity(avtaleStatusDto)
                     .build();
         } catch (Exception e) {
             return Response.status(Response.Status.CONFLICT).build();
