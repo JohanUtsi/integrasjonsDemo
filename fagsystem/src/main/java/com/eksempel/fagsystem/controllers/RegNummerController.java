@@ -24,10 +24,12 @@ public class RegNummerController {
     @Consumes("application/json")
     public Response create(RegNummerDto regNummerDto){
         try{
-            this.regNummerService.create(regNummerDto);
-            return Response.status(201).build();
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(this.regNummerService.create(regNummerDto))
+                    .build();
         }catch(Exception e){
-            return Response.status(409).build();
+            return Response.status(Response.Status.CONFLICT).build();
         }
     }
 }

@@ -25,10 +25,11 @@ public class BonusServiceImpl implements BonusService {
     }
 
     @Override
-    public void create(String navn) {
+    public Long create(String navn) {
         Bonus bonus = new Bonus();
         bonus.setNavn(navn);
         bonusRepository.save(bonus);
+        return bonus.getId();
     }
 
     private BonuserDto toDto(List<Bonus> bonuser) {

@@ -25,8 +25,10 @@ public class AvtaleServiceImpl implements AvtaleService {
     }
 
     @Override
-    public void create(AvtaleDto avtaleDto){
-        this.avtaleRepository.save(toEntity(avtaleDto));
+    public Long create(AvtaleDto avtaleDto){
+        Avtale avtale = toEntity(avtaleDto);
+        this.avtaleRepository.save(avtale);
+        return avtale.getId();
     }
 
     private Avtale toEntity(AvtaleDto avtaleDto) {

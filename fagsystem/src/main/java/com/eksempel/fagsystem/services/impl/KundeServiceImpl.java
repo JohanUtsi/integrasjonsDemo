@@ -19,8 +19,10 @@ public class KundeServiceImpl implements KundeService {
     }
 
     @Override
-    public void create(KundeDto kundeDto) {
-        this.kundeRepository.save(toEntity(kundeDto));
+    public Long create(KundeDto kundeDto) {
+        Kunde kunde = toEntity(kundeDto);
+        this.kundeRepository.save(kunde);
+        return kunde.getId();
     }
 
     private Kunde toEntity(KundeDto kundeDto) {

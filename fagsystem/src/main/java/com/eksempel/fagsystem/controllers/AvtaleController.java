@@ -22,12 +22,14 @@ public class AvtaleController {
 
     @POST
     @Consumes("application/json")
-    public Response create(AvtaleDto avtaleDto){
-        try{
-            this.avtaleService.create(avtaleDto);
-            return Response.status(201).build();
-        }catch(Exception e){
-            return Response.status(409).build();
+    public Response create(AvtaleDto avtaleDto) {
+        try {
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(this.avtaleService.create(avtaleDto))
+                    .build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.CONFLICT).build();
         }
     }
 }

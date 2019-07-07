@@ -30,7 +30,9 @@ public class BonusController {
     @POST
     @Consumes("application/json")
     public Response createBonus(BonusDto bonusDto){
-        this.bonusService.create(bonusDto.getNavn());
-        return Response.status(201).build();
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(this.bonusService.create(bonusDto.getNavn()))
+                .build();
     }
 }

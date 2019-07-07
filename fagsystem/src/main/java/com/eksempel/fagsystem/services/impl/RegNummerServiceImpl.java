@@ -20,8 +20,10 @@ public class RegNummerServiceImpl implements RegNummerService {
     }
 
     @Override
-    public void create(RegNummerDto regNummerDto){
-        this.regNummerRepository.save(toEntity(regNummerDto));
+    public Long create(RegNummerDto regNummerDto){
+        Registreringsnummer registreringsnummer = toEntity(regNummerDto);
+        this.regNummerRepository.save(registreringsnummer);
+        return registreringsnummer.getId();
     }
 
     private Registreringsnummer toEntity(RegNummerDto regNummerDto) {

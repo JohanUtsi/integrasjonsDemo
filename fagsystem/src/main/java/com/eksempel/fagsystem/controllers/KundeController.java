@@ -25,10 +25,12 @@ public class KundeController {
     @Consumes("application/json")
     public Response createKunde(KundeDto kundeDto){
         try{
-            this.kundeService.create(kundeDto);
-            return Response.status(201).build();
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(this.kundeService.create(kundeDto))
+                    .build();
         }catch(Exception e){
-            return Response.status(409).build();
+            return Response.status(Response.Status.CONFLICT).build();
         }
     }
 }
