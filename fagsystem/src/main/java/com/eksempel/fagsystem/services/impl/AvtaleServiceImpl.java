@@ -7,9 +7,6 @@ import com.eksempel.fagsystem.entities.Avtale;
 import com.eksempel.fagsystem.services.AvtaleService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class AvtaleServiceImpl implements AvtaleService {
     private AvtaleRepository avtaleRepository;
@@ -30,6 +27,16 @@ public class AvtaleServiceImpl implements AvtaleService {
 
     @Override
     public AvtaleStatusDto create(AvtaleDto avtaleDto){
+        return getAvtaleStatus(avtaleDto);
+    }
+
+    @Override
+    public AvtaleStatusDto update(AvtaleDto avtaleDto) {
+        return getAvtaleStatus(avtaleDto);
+    }
+
+    //for å unngå duplisert kode
+    private AvtaleStatusDto getAvtaleStatus(AvtaleDto avtaleDto){
         Avtale avtale = toEntity(avtaleDto);
         this.avtaleRepository.save(avtale);
         AvtaleStatusDto avtaleStatusDto = new AvtaleStatusDto();
@@ -41,6 +48,9 @@ public class AvtaleServiceImpl implements AvtaleService {
 
     private Avtale toEntity(AvtaleDto avtaleDto) {
         Avtale avtale = new Avtale();
+        if(avtaleDto.getId()!=null){
+            avtale.setId(avtaleDto.getId());
+        }
         avtale.setKunde(this.kundeRepository.findById(avtaleDto.getBrukerId()).orElse(null));
         avtale.setRegistreringsnummer(this.regNummerRepository.findById(avtaleDto.getRegnummerId()).orElse(null));
         avtale.setBonus(this.bonusRepository.findById(avtaleDto.getBonusType()).orElse(null));

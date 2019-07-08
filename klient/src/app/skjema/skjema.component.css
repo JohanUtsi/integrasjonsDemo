@@ -1,0 +1,121 @@
+:host{
+  font-family: MuseoSans, Arial, sans-serif;
+  color: #000066;
+}
+
+form{
+  width: 70%;
+}
+
+mat-card{
+  font-family: MuseoSans, Arial, sans-serif;
+}
+
+p{
+  color: #000066;
+}
+
+h1{
+  color: #000066;
+}
+
+mat-card-subtitle{
+  margin-bottom: 50px;
+  color: #000088;
+}
+
+input, mat-select{
+  border: #000066 1px solid;
+  border-radius: 5px;
+  width: 240px;
+  height: 44px;
+  margin-top: 10px;
+  font-family: MuseoSans, Arial, sans-serif;
+}
+
+.inputBra{
+  border: #000066 1px solid;
+  border-radius: 5px;
+  width: 240px;
+  height: 44px;
+  margin-top: 10px;
+  font-family: MuseoSans, Arial, sans-serif;
+}
+
+.inputDaarlig{
+  border: red 1px solid;
+  border-radius: 5px;
+  width: 240px;
+  height: 44px;
+  margin-top: 10px;
+  font-family: MuseoSans, Arial, sans-serif;
+}
+
+span{
+  color: #000088;
+}
+
+.mat-input-element{
+  font-family: MuseoSans, Arial, sans-serif;
+}
+
+.skjema{
+  horiz-align: center;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.skjemaHolder{
+  display: flex;
+  display: -moz-flex;
+  display: -ms-flex;
+
+  -ms-flex-align: start;
+  flex-direction: column;
+
+  flex-wrap: wrap;
+  -ms-flex-wrap:wrap;
+}
+
+.skjemaFelt{
+  display: flex;
+  display: -moz-flex;
+  display: -ms-flex;
+
+  -ms-flex-align: start;
+  flex-direction: column;
+
+  margin-bottom: 50px;
+}
+
+.bonusFelt{
+  display: flex;
+  display: -moz-flex;
+  display: -ms-flex;
+
+  -ms-flex-align: start;
+  flex-direction: column;
+}
+
+.navnFelt{
+  columns: 2 300px;
+}
+
+.errorFelt{
+  margin-top: 5px;
+  color: red;
+}
+
+#navn{
+ margin-right: 10%;
+}
+
+#submitKnapp{
+  color: white;
+  background-color: #0074D9;
+}
+
+#avbrytKnapp{
+  color: #0074D9;
+}
+

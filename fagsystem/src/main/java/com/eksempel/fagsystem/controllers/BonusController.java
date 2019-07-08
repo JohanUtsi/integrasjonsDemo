@@ -22,8 +22,17 @@ public class BonusController {
 
     @GET
     @Produces("application/json")
-    public BonuserDto getAllBonuses(){
-        return this.bonusService.getAll();
+    public Response getAllBonuses(){
+
+        return Response.status(Response.Status.OK)
+                .entity(this.bonusService.getAll())
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .build();
     }
 
     //mest laget kun for å teste POST med noe enkelt

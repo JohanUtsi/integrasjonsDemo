@@ -5,4 +5,6 @@ import com.eksempel.fagsystem.dtos.AvtaleStatusDto;
 
 public interface AvtaleService {
     AvtaleStatusDto create(AvtaleDto avtaleDto);
+
+    AvtaleStatusDto update(AvtaleDto avtaleDto);
 }

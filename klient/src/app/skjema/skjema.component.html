@@ -1,0 +1,83 @@
+<mat-card class="skjema">
+  <mat-card-header><h1>Kjøp bilforsikring</h1></mat-card-header>
+  <mat-card-subtitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus urna id ante egestas, vitae
+    dapibus elit sodales. Proin laoreet quam sit amet elit sodales, vel suscipit lectus facilisis. Nullam sagittis magna
+    ut metus vestibulum blandit. Proin odio arcu, tincidunt quis arcu a, accumsan venenatis tortor. Nulla ut augue
+    magna. Morbi sed lacus efficitur ligula aliquet eleifend.
+  </mat-card-subtitle>
+  <mat-card-content>
+    <form [formGroup]="skjema">
+
+      <div class="skjemaHolder">
+        <div class="skjemaFelt">
+
+          <span><b>Bilens Registreringsnummer</b></span>
+          <input
+            [ngClass]="skjema.controls['regNummer'].hasError('required') && skjema.controls['regNummer'].touched?'inputDaarlig':'inputBra'"
+            formControlName="regNummer" label="Bilens Registreringsnummer"
+            matInput placeholder="AB 12345">
+          <span *ngIf="skjema.controls['regNummer'].hasError('required') && skjema.controls['regNummer'].touched"
+                class="errorFelt">● Må fylles inn</span>
+
+        </div>
+        <div class="bonusFelt">
+          <span><b>Din bonus</b></span>
+          <mat-select class="skjemaFelt"
+                      formControlName="bonus">
+            <mat-option *ngFor="let bonus of this?.bonuses"
+                        [value]="bonus.id">
+              {{bonus.navn}}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div class="skjemaFelt">
+
+          <span><b>Fødselsnummer</b></span>
+          <input [ngClass]="(skjema.controls['fodselsnummer'].hasError('minlength') || skjema.controls['fodselsnummer'].hasError('maxlength') ||
+           skjema.controls['fodselsnummer'].hasError('required'))
+          && skjema.controls['fodselsnummer'].touched?'inputDaarlig':'inputBra'"
+                 formControlName="fodselsnummer" matInput
+                 placeholder="11 siffer">
+          <span *ngIf="(skjema.controls['fodselsnummer'].hasError('minlength') || skjema.controls['fodselsnummer'].hasError('maxlength') ||
+          skjema.controls['fodselsnummer'].hasError('required'))
+          && skjema.controls['fodselsnummer'].touched" class="errorFelt">● Må være 11 siffer</span>
+
+        </div>
+
+        <div class="navnFelt">
+          <div class="skjemaFelt" id="navn">
+            <span><b>Fornavn</b></span>
+            <input
+              [ngClass]="skjema.controls['fornavn'].hasError('required') && skjema.controls['fornavn'].touched?'inputDaarlig':'inputBra'"
+              formControlName="fornavn" matInput>
+            <span *ngIf="skjema.controls['fornavn'].hasError('required') && skjema.controls['fornavn'].touched" class="errorFelt"
+                  style="float: left">● Må fylles inn</span>
+          </div>
+
+          <div class="skjemaFelt">
+            <span><b>Etternavn</b></span>
+            <input
+              [ngClass]="skjema.controls['etternavn'].hasError('required') && skjema.controls['etternavn'].touched?'inputDaarlig':'inputBra'"
+              formControlName="etternavn" matInput>
+            <span *ngIf="skjema.controls['etternavn'].hasError('required') && skjema.controls['etternavn'].touched" class="errorFelt"
+                  style="float: left">● Må fylles inn</span>
+          </div>
+        </div>
+
+        <div class="skjemaFelt">
+          <span><b>E-post</b></span>
+          <input
+            [ngClass]="(skjema.controls['epost'].hasError('email') || skjema.controls['epost'].hasError('required')) && skjema.controls['epost'].touched?'inputDaarlig':'inputBra'"
+            formControlName="epost" matInput>
+          <span *ngIf="(skjema.controls['epost'].hasError('email') || skjema.controls['epost'].hasError('required')) && skjema.controls['epost'].touched"
+                class="errorFelt">● Skriv inn en gyldig epostadresse</span>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button id="submitKnapp" mat-button type="button" (click)="submit()">Beregn pris</button>
+    <button id="avbrytKnapp" mat-button type="button" (click)="cancel()">Avbryt</button>
+  </mat-card-actions>
+</mat-card>

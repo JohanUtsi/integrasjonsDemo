@@ -4,10 +4,7 @@ import com.eksempel.fagsystem.dtos.AvtaleDto;
 import com.eksempel.fagsystem.services.AvtaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -29,6 +26,20 @@ public class AvtaleController {
             return Response
                     .status(Response.Status.CREATED)
                     .entity(this.avtaleService.create(avtaleDto))
+                    .build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+    }
+
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response update(AvtaleDto avtaleDto){
+        try {
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(this.avtaleService.update(avtaleDto))
                     .build();
         } catch (Exception e) {
             return Response.status(Response.Status.CONFLICT).build();
