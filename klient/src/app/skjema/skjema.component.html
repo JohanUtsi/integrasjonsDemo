@@ -1,16 +1,20 @@
 <mat-card class="skjema">
+
   <mat-card-header><h1>Kjøp bilforsikring</h1></mat-card-header>
+
   <mat-card-subtitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus urna id ante egestas, vitae
     dapibus elit sodales. Proin laoreet quam sit amet elit sodales, vel suscipit lectus facilisis. Nullam sagittis magna
     ut metus vestibulum blandit. Proin odio arcu, tincidunt quis arcu a, accumsan venenatis tortor. Nulla ut augue
     magna. Morbi sed lacus efficitur ligula aliquet eleifend.
   </mat-card-subtitle>
+
   <mat-card-content>
+
     <form [formGroup]="skjema">
 
       <div class="skjemaHolder">
-        <div class="skjemaFelt">
 
+        <div class="skjemaFelt">
           <span><b>Bilens Registreringsnummer</b></span>
           <input
             [ngClass]="skjema.controls['regNummer'].hasError('required') && skjema.controls['regNummer'].touched?'inputDaarlig':'inputBra'"
@@ -18,8 +22,8 @@
             matInput placeholder="AB 12345">
           <span *ngIf="skjema.controls['regNummer'].hasError('required') && skjema.controls['regNummer'].touched"
                 class="errorFelt">● Må fylles inn</span>
-
         </div>
+
         <div class="bonusFelt">
           <span><b>Din bonus</b></span>
           <mat-select class="skjemaFelt"
@@ -32,7 +36,6 @@
         </div>
 
         <div class="skjemaFelt">
-
           <span><b>Fødselsnummer</b></span>
           <input [ngClass]="(skjema.controls['fodselsnummer'].hasError('minlength') || skjema.controls['fodselsnummer'].hasError('maxlength') ||
            skjema.controls['fodselsnummer'].hasError('required'))
@@ -42,7 +45,6 @@
           <span *ngIf="(skjema.controls['fodselsnummer'].hasError('minlength') || skjema.controls['fodselsnummer'].hasError('maxlength') ||
           skjema.controls['fodselsnummer'].hasError('required'))
           && skjema.controls['fodselsnummer'].touched" class="errorFelt">● Må være 11 siffer</span>
-
         </div>
 
         <div class="navnFelt">
@@ -75,11 +77,15 @@
         </div>
 
         <div class="skjemaFelt" *ngIf="this.avtaleStatus != null"><span>Avtalenummer: {{this?.avtaleStatus.avtalenummer}} Status: {{this?.avtaleStatus.status}}</span></div>
+        <span class="errorFelt" *ngIf="skjemaFaila">● Oida noe gikk galt her!</span>
+
       </div>
     </form>
   </mat-card-content>
+
   <mat-card-actions>
     <button id="submitKnapp" mat-button type="button" (click)="submit()">Beregn pris</button>
     <button id="avbrytKnapp" mat-button type="button" (click)="cancel()">Avbryt</button>
   </mat-card-actions>
+
 </mat-card>

@@ -16,6 +16,7 @@ export class SkjemaComponent implements OnInit {
   skjema: FormGroup;
   bonuses: Bonus[];
   avtaleStatus: Avtalestatus = null;
+  skjemaFaila: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private bonusService: BonusService,
               private forsikringService: ForsikringService) { }
@@ -50,6 +51,8 @@ export class SkjemaComponent implements OnInit {
       console.log(forsikring);
       this.forsikringService.createAvtale(forsikring).subscribe(status=>{
         this.avtaleStatus = status;
+      }, () =>{
+        this.skjemaFaila = true;
       });
     }else{
       Object.keys(this.skjema.controls).forEach(key => {
