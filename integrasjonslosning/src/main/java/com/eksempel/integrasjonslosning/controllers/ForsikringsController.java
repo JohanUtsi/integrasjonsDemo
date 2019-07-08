@@ -33,7 +33,9 @@ public class ForsikringsController {
                     .entity(avtaleStatusDto)
                     .build();
         } catch (Exception e) {
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("Woops")
+                    .build();
         }
     }
 }

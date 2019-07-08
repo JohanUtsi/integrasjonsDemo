@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BonusService} from '../bonus/bonus.service';
 import {Bonus} from '../bonus/bonus.model';
+import {ForsikringService} from '../forsikring/forsikring.service';
+import {Forsikring} from '../forsikring/forsikring.model';
+import {Avtalestatus} from '../avtale/avtalestatus.model';
 
 @Component({
   selector: 'app-skjema',
@@ -12,8 +15,10 @@ export class SkjemaComponent implements OnInit {
 
   skjema: FormGroup;
   bonuses: Bonus[];
+  avtaleStatus: Avtalestatus = null;
 
-  constructor(private formBuilder: FormBuilder, private bonusService: BonusService) { }
+  constructor(private formBuilder: FormBuilder, private bonusService: BonusService,
+              private forsikringService: ForsikringService) { }
 
   ngOnInit() {
     this.klargjorSkjema();
@@ -35,7 +40,17 @@ export class SkjemaComponent implements OnInit {
 
   submit(){
     if(this.skjema.valid){
-      console.log("valid");
+      let forsikring = new Forsikring();
+      forsikring.bonusid = this.skjema.controls['bonus'].value;
+      forsikring.epost = this.skjema.controls['epost'].value;
+      forsikring.fornavn = this.skjema.controls['fornavn'].value;
+      forsikring.etternavn = this.skjema.controls['etternavn'].value;
+      forsikring.regNummer = this.skjema.controls['regNummer'].value;
+      forsikring.fodselsnummer = this.skjema.controls['fodselsnummer'].value;
+      console.log(forsikring);
+      this.forsikringService.createAvtale(forsikring).subscribe(status=>{
+        this.avtaleStatus = status;
+      });
     }else{
       Object.keys(this.skjema.controls).forEach(key => {
         this.skjema.get(key).markAsTouched();

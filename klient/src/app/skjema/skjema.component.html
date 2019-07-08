@@ -73,6 +73,8 @@
           <span *ngIf="(skjema.controls['epost'].hasError('email') || skjema.controls['epost'].hasError('required')) && skjema.controls['epost'].touched"
                 class="errorFelt">● Skriv inn en gyldig epostadresse</span>
         </div>
+
+        <div class="skjemaFelt" *ngIf="this.avtaleStatus != null"><span>Avtalenummer: {{this?.avtaleStatus.avtalenummer}} Status: {{this?.avtaleStatus.status}}</span></div>
       </div>
     </form>
   </mat-card-content>
